@@ -29,20 +29,9 @@ public class BootstrapData implements CommandLineRunner {
         eric.setFirstName("Eric");
         eric.setLastName("Evans");
 
-        Publisher booksPublisher = new Publisher();
-        booksPublisher.setPublisherName("Book Publisher");
-        booksPublisher.setAddress("Groove Street");
-        booksPublisher.setCity("San Andreas");
-        booksPublisher.setState("California");
-        booksPublisher.setZip("123456");
-
         Book ddd= new Book();
         ddd.setTitle("Data Structures & Algorithms");
         ddd.setIsbn("123456");
-
-
-
-        Publisher booksPublisherSaved = publisherRepository.save(booksPublisher);
 
         Author ericSaved = authorRepository.save(eric);
         Book dddSaved = bookRepository.save(ddd);
@@ -61,8 +50,6 @@ public class BootstrapData implements CommandLineRunner {
         ericSaved.getBooks().add(dddSaved);
         rodSaved.getBooks().add(noEJBSaved);
 
-        dddSaved.setPublisher(booksPublisherSaved);
-        noEJBSaved.setPublisher(booksPublisherSaved);
 
         authorRepository.save(ericSaved);
         authorRepository.save(rodSaved);
@@ -70,6 +57,16 @@ public class BootstrapData implements CommandLineRunner {
         System.out.println("In Bootstrap");
         System.out.println("Author Count: " + authorRepository.count());
         System.out.println("Book Count " + bookRepository.count());
+
+        Publisher booksPublisher = new Publisher();
+        booksPublisher.setPublisherName("Book Publisher");
+        booksPublisher.setAddress("Groove Street");
+        booksPublisher.setCity("San Andreas");
+        booksPublisher.setState("California");
+        booksPublisher.setZip("123456");
+
+        Publisher booksPublisherSaved = publisherRepository.save(booksPublisher);
+
         System.out.println("Publisher Count " + publisherRepository.count());
     }
 }
